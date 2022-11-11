@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Bring out the file and password
+#Bring out the files in the directory
 
 passwd="/etc/passwd"
 while IFS= read -r line
