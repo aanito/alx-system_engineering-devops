@@ -1,9 +1,9 @@
-file {  ‘/tmp/school’ : 
+file {  ‘school’ : 
 	path => ‘/tmp/school’,
 	ensure => ‘present’,
 	content => ‘I love Puppet’,
 	group => ‘www.data’,
 	owner => ‘www.data’,
-	permission => ‘use: 0744’,
+	mode => ‘0744’,
 } 
 
