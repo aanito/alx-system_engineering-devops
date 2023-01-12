@@ -1,4 +1,4 @@
-nifet to install nginx a some other additions
+#Manifet to install nginx a some other additions
 
 package { 'nginx':
   ensure => installed,
@@ -12,7 +12,7 @@ file_line { 'Add redirection, 301':
 }
 
 file { '/var/www/html/index.html':
-  content => 'Hello World!',
+  content => 'Holberton School',
 }
 
 service { 'nginx':
