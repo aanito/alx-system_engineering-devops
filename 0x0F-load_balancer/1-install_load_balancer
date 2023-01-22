@@ -3,6 +3,7 @@
 sudo apt-get update
 sudo apt-get install haproxy
 sudo touch /etc/haproxy/haproxy.cfg
+sudo chown -R $USER:$USER /etc/haproxy/haproxy.cfg
 sudo chmod 755 /etc/haproxy/haproxy.cfg
 sed -i "$ a frontend load_balancer\n    bind *:80\n     mode http\n     default_backend web_servers\nbackend web_servers\n      balance roundrobin\n    server 31764-web-01 54.237.96.253:80 check\n    server 31764-web-02 34.202.157.107:80 check" > /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
