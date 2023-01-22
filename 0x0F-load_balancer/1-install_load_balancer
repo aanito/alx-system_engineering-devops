@@ -18,4 +18,4 @@ backend nodes
 	server 31764-web-01 54.237.96.253
 	server 31764-web-02 34.202.157.107" >> /etc/haproxy/haproxy.cfg
 
-sudo service haproxy restarti
+sudo service haproxy restart
