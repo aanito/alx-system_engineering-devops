@@ -1,4 +1,5 @@
-#Puppet manifest to install nginx and others requirements
+#Puppet file to install nginx and others requirements
+#Puppet to install nginx and others requirements
 
 $str = "add_header X-Served-By ${hostname};"
 
@@ -22,9 +23,9 @@ exec { 'update':
   line   => $str,
 }
 -> file { '/var/www/html/index.html':
-  content => 'Hello World!',
+  content => 'Holberton School',
 }
 -> service { 'nginx':
   ensure  => running,
   require => Package['nginx'],
-}  a new ubuntu server
+}
