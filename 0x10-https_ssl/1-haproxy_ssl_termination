@@ -34,7 +34,7 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 frontend load_balancer
     bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/live/www.hillives.tech/fullchain.pem
+    bind *:443 ssl crt /etc/letsencrypt/live/www.tech-space.tech/fullchain.pem
     redirect scheme https if !{ ssl_fc }
     mode http
     default_backend web_servers
