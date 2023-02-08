@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-#Here will be the prit after dash
-for i in *;
-do
-    echo "$i" | cut -d'-' -f2
-done

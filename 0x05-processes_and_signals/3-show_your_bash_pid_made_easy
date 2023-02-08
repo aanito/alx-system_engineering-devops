@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# displays PID avoiding ps use, also showing the name process
-pgrep -l "bash"
