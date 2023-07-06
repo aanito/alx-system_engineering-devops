@@ -37,8 +37,8 @@ frontend http-in
 
 backend app-servers
     balance roundrobin
-    server 31764-web-01 34.201.161.61:80 check
-    server 31764-web-02 3.80.18.176:80 check
+    server web-01 34.201.161.61:80 check
+    server web-02 3.80.18.176:80 check
 EOF
 
 # Enable HAProxy to be managed via init script
