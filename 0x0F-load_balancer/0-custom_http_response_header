@@ -4,8 +4,8 @@
 
 sudo apt-get update -y
 sudo apt-get install -y nginx
-echo "Hello world!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo sed -i "/server_name _;/ a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=qh2-tgulwu4 permanent;" /etc/nginx/sites-available/default
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+sudo sed -i "/server_name _;/ a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 sudo vim /var/www/html/error-404.html
 echo "ceci n'est pas une page" | sudo tee /var/www/html/error-404.html #sudo tee - used for permissions
 sudo sed -i "/http {/ a\\\terror_page 404 /error-404.html;" /etc/nginx/nginx.conf
