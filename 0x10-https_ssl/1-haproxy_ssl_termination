@@ -1,4 +1,3 @@
-
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -20,12 +19,12 @@ defaults
 
 frontend http-in
     bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/live/www.hillives.tech/fullchain.pem
+    bind *:443 ssl crt /etc/letsencrypt/live/www.hillives.tech/hillives.tech.pem
     redirect scheme https if !{ ssl_fc }
     mode http
     default_backend app-servers
 
 backend app-servers
     balance roundrobin
-    server web-01 "34.201.161.61:80" check
-    server web-02 "3.80.18.176:80" check
+    server web-01 34.201.161.61:80 check
+    server web-02 3.80.18.176:80 check
