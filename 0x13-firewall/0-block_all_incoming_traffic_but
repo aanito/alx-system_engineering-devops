@@ -1,0 +1,4 @@
+!#/usr/bin/env bash
+#block all incoming connections except the tcp ports, 22, 80, 443
+sudo ufw allow proto tcp from any to any port 22,80,443
+sudo ufw enable
