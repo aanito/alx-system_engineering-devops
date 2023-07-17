@@ -1,4 +1,8 @@
 !#/usr/bin/env bash
 #block all incoming connections except the tcp ports, 22, 80, 443
+sudo ufw status
+sudo ufw allow "OpenSSH"
+sudo ufw default deny incoming
 sudo ufw allow proto tcp from any to any port 22,80,443
 sudo ufw enable
+sudo ufw reload
