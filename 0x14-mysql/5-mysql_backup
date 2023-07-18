@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 # Check if the password argument is provided
-if [ -z "$1" ]; then
-    echo "Please provide the MySQL password as an argument."
-    exit 1
-fi
 
 # Get the current date in the required format
 date=$(date +%d-%m-%Y)
