@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# a compressed command to configure nginx as user and to listen on port 8080
-sed -i 's/listen       80;/listen       8080;/' /etc/nginx/nginx.conf
-sed -i 's/^\(user\s*\).*/\1nginx;/' /etc/nginx/nginx.conf
-sed -i 's/^\(worker_processes\s*\).*/\12;/' /etc/nginx/nginx.conf
-sed -i 's/^\(worker_handle_connections\s*\).*/\1off;/' /etc/nginx/nginx.conf
-sed -i 's/^\(keepalive\s*\).*/\15;/' /etc/nginx/nginx.conf
-echo -e '\n' >> /etc/nginx/nginx.conf
-/usr/sbin/nginx -g 'daemon off;'
+# shorten script
+pkill -f apache2
+chown nginx:nginx /etc/nginx/nginx.conf
+chmod 700 /etc/nginx/nginx.conf
+sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
+sudo -u nginx service nginx start
