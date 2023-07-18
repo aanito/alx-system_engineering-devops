@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Add nginx user if it doesn't exist
 if ! id -u nginx >/dev/null 2>&1; then
     useradd -M nginx
