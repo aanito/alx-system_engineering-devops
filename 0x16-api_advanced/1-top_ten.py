@@ -1,29 +1,26 @@
 
 #!/usr/bin/python
 """the reddit advanced api"""
-
+import json
 import requests
+import sys
 
 def top_ten(subreddit):
-    # set a custom user-agent to avoid too many requests error
-    headers = {"user-agent": "my reddit api client"}
+    url = f"https://www.reddit.com/dev/api/{subreddit}/hot.json?limit=10"
+    headers = {'user-agent': 'Mozilla/5.0'}
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        data = response.json()
+        
+        if 'data' in data and 'children' in data['data']:
+            for post in data['data']['children']:
+                print(post['data']['title'])
+        else:
+            print("Invalid subreddit!")
+    else:
+        print("Invalid subreddit!")
 
-    # make the api request
-    url = f"https://www.reddit.com/dev/api/hot.json?limit=10"
-    response = requests.get(url, headers=headers, allow_redirects=False)
-
-    # check if the request was successful
-    if response.status_code != 200:
-        print("None")
-        return
-
-    # parse the response to get the titles of the first 10 hot posts
-    data = response.json()
-    posts = data["data"]["children"]
-    for post in posts:
-        title = post["data"]["title"]
-        print(title)
-
-# example usage
+# Testing the function
 top_ten("python")
-
