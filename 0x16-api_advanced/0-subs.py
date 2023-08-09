@@ -1,24 +1,22 @@
 #!/usr/bin/python
 """The reddit advanced api"""
 
+import json
 import requests
+import sys
 
 def number_of_subscribers(subreddit):
-    # Set a custom user-agent to avoid too many requests error
-    headers = {"User-Agent": "My Reddit API Client"}
-
-    # Make the API request
-    url = f"https://www.reddit.com/dev/api/"
-    response = requests.get(url, headers=headers)
-
-    # Check if the request was successful
-    if response.status_code != 200:
-        # Invalid subreddit or some other error occurred
+    """Queries the Reddit API and returns the number of subscribers for a given subreddit."""
+    headers = {'User-Agent': 'Custom User-Agent/1.0'}
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    
+    try:
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        if 'subscribers' in data['data']:
+            return data['data']['subscribers']
+        else:
+            return 0
+    except:
         return 0
-
-    # Parse the response to get the number of subscribers
-    data = response.json()
-    subscribers = data["data"]["subscribers"]
-
-    return subscribers
 
