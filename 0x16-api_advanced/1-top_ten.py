@@ -1,5 +1,4 @@
-
-#!/usr/bin/python
+#!/usr/bin/python3
 """the reddit advanced api"""
 import json
 import requests
