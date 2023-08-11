@@ -5,6 +5,7 @@ Like that of python here
 
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     headers = {"User-agent": "MyApp/1.0"}
@@ -29,4 +30,3 @@ def recurse(subreddit, hot_list=[], after=None):
             return hot_list
     else:
         return None
-    
