@@ -3,13 +3,11 @@
 The list of words here
 """
 
-
-
 import requests
 
 def count_words(subreddit, word_list, after=None, count={}):
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'}
+    headers = {'User-Agent': 'Chrome/79.0.3945.88'}
     params = {'after': after} if after else {}
     response = requests.get(url, headers=headers, params=params)
 
