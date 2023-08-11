@@ -1,25 +1,28 @@
 #!/usr/bin/python3
-"""the reddit advanced api"""
-import json
+"""
+The reddit API requst for the top hot posts of the subreddit 
+"""
+
 import requests
-import sys
+
 
 def top_ten(subreddit):
-    url = f"https://www.reddit.com/dev/api/{subreddit}/hot.json?limit=10"
-    headers = {'user-agent': 'Mozilla/5.0'}
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=10'
+    headers = {'User-Agent': 'MyApp/1.0'}
     
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, allow_redirects=False)
     
     if response.status_code == 200:
         data = response.json()
+        posts = data['data']['children']
         
-        if 'data' in data and 'children' in data['data']:
-            for post in data['data']['children']:
+        if posts:
+            for post in posts:
                 print(post['data']['title'])
         else:
-            print("Invalid subreddit!")
+            print("None.")
     else:
-        print("Invalid subreddit!")
-
-# Testing the function
-top_ten("python")
+        if response.status_code == 302:
+            print("None")
+        else:
+            print("None")
