@@ -4,45 +4,38 @@ The list of words here
 """
 
 
+
 import requests
 
-def count_words(subreddit, word_list, next_page=None):
-    # base case: if subreddit is invalid or no posts match
-    if subreddit is None:
+def count_words(subreddit, word_list, after=None, count={}):
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'}
+    params = {'after': after} if after else {}
+    response = requests.get(url, headers=headers, params=params)
+
+    if response.status_code != 200:
+        print("Invalid subreddit or error occurred")
         return
 
-    # make API request to get hot articles from the subreddit
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    response = requests.get(url, headers={"user-agent": "mozilla/5.0"})
+    data = response.json()
+    articles = data['data']['children']
 
-    # check if API request was successful
-    if response.status_code == 200:
-        data = response.json()
-        articles = data['data']['children']
+    for article in articles:
+        title = article['data']['title'].lower()
+        for word in word_list:
+            word = word.lower()
+            if word in title:
+                count[word] = count.get(word, 0) + title.count(word)
 
-        # dictionary to store word counts
-        word_counts = {}
+    after = data['data']['after']
+    if after:
+        count_words(subreddit, word_list, after, count)
+    else:
+        sorted_count = dict(sorted(count.items(), key=lambda item: (-item[1], item[0])))
+        for word, cnt in sorted_count.items():
+            print(f"{word}: {cnt}")
 
-        # iterate over the articles' titles and count the words
-        for article in articles:
-            title = article['data']['title'].lower()
 
-            # iterate over the word_list and count the occurrences in the title
-            for keyword in set(word_list):
-                count = title.count(keyword.lower())
-                if keyword.lower() not in word_counts:
-                    word_counts[keyword.lower()] = count
-                else:
-                    word_counts[keyword.lower()] += count
+# Example usage
+#count_words("python", ["python", "java", "javascript"])
 
-        # sort the word counts in descending order of count, and alphabetically if counts are the same
-        sorted_counts = sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))
-
-        # print the results
-        for word, count in sorted_counts:
-            print(f"{word}: {count}")
-
-        # recursive call to next page if available
-        next_page = data['data']['after']
-        if next_page is not None:
-            count_words(subreddit, word_list, next_page)
