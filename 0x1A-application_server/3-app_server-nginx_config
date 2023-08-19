@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name 204.236.240.61;
+
+    location /airbnb-dynamic/number_odd_or_even/ {
+        proxy_pass http://localhost:5001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
